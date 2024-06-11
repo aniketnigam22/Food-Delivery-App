@@ -21,8 +21,7 @@ const SignupScreen = () => {
                     <TextInput style={styles.input} placeholder='Password' />
                 </View>
 
-                <Icon name="md-beer" type="ionicon" color="#887700" />
-
+                <Icon name="rocket" size={30} color="#900" />
             </View>
         </>
     )
