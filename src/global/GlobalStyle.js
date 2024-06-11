@@ -21,7 +21,7 @@ module.exports = {
     hr80:{
         width:'80%',
         borderBottomColor:'#E0E0E0',
-        borderBottomWidth:1,
+        borderBottomWidth:2,
         marginVertical:20
     }
 }
