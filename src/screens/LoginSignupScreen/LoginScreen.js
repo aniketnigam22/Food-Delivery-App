@@ -4,7 +4,7 @@ import { btn1, color, hr80, title } from '../../global/GlobalStyle'
 import { Icon } from 'react-native-elements';
 
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [emailFocus, setEmailFoucs] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
@@ -75,7 +75,9 @@ const LoginScreen = () => {
                 <View style={hr80}></View>
 
                 <View>
-                    <Text style={styles.bottomText}>Don't have an account?  <Text style={styles.bottomInnerText}>Sign up</Text></Text>
+                    <Text style={styles.bottomText}>Don't have an account?  <Text style={styles.bottomInnerText} onPress={() => (
+                        navigation.navigate('SignupScreen')
+                    )}>Sign up</Text></Text>
                 </View>
 
             </View>
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     bottomInnerText: {
         fontSize: 20,
         color: color.text1,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     }
 })
 

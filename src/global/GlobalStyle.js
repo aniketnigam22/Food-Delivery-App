@@ -16,7 +16,8 @@ module.exports = {
         alignItems:'center',
         justifyContent:'center',
         elevation:10,
-        color:'white'
+        color:'white',
+        marginVertical:5
     },
     hr80:{
         width:'80%',

@@ -4,7 +4,7 @@ import { AppImages } from '../../common/AppImages'
 import { color, hr80 } from '../../global/GlobalStyle'
 
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
     return (
         <>
             <View style={styles.container}>
@@ -18,11 +18,15 @@ const WelcomeScreen = () => {
                 <View style={hr80} />
 
                 <View style={styles.btnOut}>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={() => (
+                        navigation.navigate('SignupScreen')
+                    )}>
                         <Text style={styles.btn}>Signup</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={() => (
+                        navigation.navigate('LoginScreen')
+                    )}>
                         <Text style={styles.btn}>Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '50%',
         alignItems: 'center',
-      
+
     },
     logo: {
         width: '100%',
