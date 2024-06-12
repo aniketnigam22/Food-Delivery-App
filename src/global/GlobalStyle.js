@@ -2,7 +2,8 @@ module.exports = {
     color: {
         col1:'white',
         text1:'red',
-        text2:'grey'
+        text2:'grey',
+        text3:'black'
     },
     title:{
         title1:30,
