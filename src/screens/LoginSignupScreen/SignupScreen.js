@@ -25,6 +25,8 @@ const SignupScreen = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder='Full Name'
+              placeholderTextColor={color.text2}
+
               onFocus={() => {
                 setEmailFoucs(false)
                 setShowPassword(false)
@@ -41,6 +43,8 @@ const SignupScreen = ({ navigation }) => {
             <Icon name="email" size={30} color={emailFocus === true ? color.text1 : color.text2} />
             <TextInput
               style={styles.input}
+              placeholderTextColor={color.text2}
+
               placeholder='Email'
               onFocus={() => {
                 setEmailFoucs(true)
@@ -60,6 +64,8 @@ const SignupScreen = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder='Phone Number'
+              placeholderTextColor={color.text2}
+
               onFocus={() => {
                 setPhoneFocus(true)
                 setShowPassword(false)
@@ -84,6 +90,7 @@ const SignupScreen = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder='Password'
+              placeholderTextColor={color.text2}
               onFocus={() => {
                 setEmailFoucs(false)
                 setPasswordFocus(true)
@@ -117,6 +124,8 @@ const SignupScreen = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder='Confirm Password'
+              placeholderTextColor={color.text2}
+
               onFocus={() => {
                 setEmailFoucs(false)
                 setPasswordFocus(false)
@@ -144,6 +153,7 @@ const SignupScreen = ({ navigation }) => {
           <View style={styles.inputOut}>
             <TextInput
               placeholder='Enter your Address'
+              placeholderTextColor={color.text2}
               style={styles.input}
               onFocus={() => {
                 setEmailFoucs(false)
@@ -216,7 +226,8 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 19,
     marginLeft: 10,
-    width: '80%'
+    width: '80%',
+    color:'black'
   },
   singInButton: {
     color: color.col1,

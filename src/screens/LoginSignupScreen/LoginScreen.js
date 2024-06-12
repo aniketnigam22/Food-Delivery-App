@@ -19,6 +19,7 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         style={styles.input}
                         placeholder='Email'
+                        placeholderTextColor={color.text2}
                         onFocus={() => {
                             setEmailFoucs(true)
                             setShowPassword(false)
@@ -40,7 +41,10 @@ const LoginScreen = ({ navigation }) => {
                         onFocus={() => {
                             setEmailFoucs(false)
                             setPasswordFocus(true)
+                            
                         }}
+                        placeholderTextColor={color.text2}
+
                         secureTextEntry={showPassword === true ? false : true}
                     />
                     <Icon
@@ -117,7 +121,8 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 19,
         marginLeft: 10,
-        width: '80%'
+        width: '80%',
+        color:color.text3
     },
     singInButton: {
         color: color.col1,
