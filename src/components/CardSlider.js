@@ -48,7 +48,7 @@ export default CardSlider
 
 const styles = StyleSheet.create({
     container: {
-    marginVertical:20
+        marginVertical: 20
     },
     cardOutHead: {
         color: color.text3,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     },
     cardOut: {
         width: '100%',
-   
+
     },
     card: {
         width: 300,
@@ -71,48 +71,48 @@ const styles = StyleSheet.create({
         borderColor: '#e8e8e8',
         backgroundColor: color.col1
     },
-    cardImgIn:{
-        width:'100%',
-        height:200,
-        borderRadius:10
+    cardImgIn: {
+        width: '100%',
+        height: 200,
+        borderRadius: 10
     },
-    s2:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
+    s2: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         // backgroundColor:'red',
-        marginHorizontal:15
+        marginHorizontal: 15
     },
-    txt1:{
-        fontSize:18,
-        color:color.text3,
-        marginHorizontal:5,
-        width:150
+    txt1: {
+        fontSize: 18,
+        color: color.text3,
+        marginHorizontal: 5,
+        width: 150
     },
-    txt2:{
-        fontSize:20,
-        color:color.text2,
-        marginRight:10
+    txt2: {
+        fontSize: 20,
+        color: color.text2,
+        marginRight: 10
     },
-    s2In:{
-        flexDirection:'row',
-        alignItems:'center',
-        marginHorizontal:10
+    s2In: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 10
     },
-    s3:{
-        alignItems:'center',
-        position:'absolute',
-        bottom:1,
-        width:'100%'
+    s3: {
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 1,
+        width: '100%'
     },
-    btn:{
-        backgroundColor:color.text1,
-        color:color.col1,
-        paddingHorizontal:10,
-        paddingVertical:5,
-        fontSize:20,
-        borderRadius:10,
-        width:'90%',
-        textAlign:'center'
+    btn: {
+        backgroundColor: color.text1,
+        color: color.col1,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        fontSize: 20,
+        borderRadius: 10,
+        width: '90%',
+        textAlign: 'center'
     }
 })

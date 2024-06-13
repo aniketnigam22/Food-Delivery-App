@@ -55,7 +55,8 @@ const HomeScreen = () => {
                         onChangeText={(text) => { setSearchText(text) }}
                     />
                 </View>
-                {searchText != ''
+                {
+                    searchText != ''
                     &&
                     <View style={styles.searchReasultOuter}>
                         <FlatList
@@ -72,7 +73,8 @@ const HomeScreen = () => {
                             }}
 
                         />
-                    </View>}
+                    </View>
+                }
                 <Categories />
                 <OfferSlider />
                 <CardSlider title={'Todays Special'} data={foodData} />
@@ -108,22 +110,23 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         width: '100%'
     },
-    searchResultText:{
-       width:'100%',
-       padding:5,
-       color:"red",
-       fontWeight:'500',
-       fontSize:16
+    searchResultText: {
+        width: '100%',
+        padding: 5,
+        color: "red",
+        fontWeight: '500',
+        fontSize: 16
     },
-    searchReasultOuter:{
-        width:'100%',
-        marginHorizontal:30,
+    searchReasultOuter: {
+        width: '100%',
+        marginHorizontal: 30,
         // height:'6%',
-        backgroundColor:color.col1
+        backgroundColor: color.col1,
+        
     },
-    searchResultInner:{
-        width:'100%'
+    searchResultInner: {
+        width: '100%'
     },
-    
+
 })
 export default HomeScreen
