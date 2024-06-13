@@ -10,24 +10,24 @@ const Categories = () => {
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <View style={styles.box}>
-                    <Image source={AppImages.burger} style={styles.myIcon} />
-                    <Text style={styles.text}>Burger</Text>
+                    <Image source={AppImages.starter} style={styles.myIcon} />
+                    <Text style={styles.text}>Starter</Text>
                 </View>
                 <View style={styles.box}>
-                    <Image source={AppImages.pizza} style={styles.myIcon} />
-                    <Text style={styles.text}>Pizza</Text>
+                    <Image source={AppImages.breakfast} style={styles.myIcon} />
+                    <Text style={styles.text}>Breakfast</Text>
                 </View>
                 <View style={styles.box}>
-                    <Image source={AppImages.noodles} style={styles.myIcon} />
-                    <Text style={styles.text}>Noodles</Text>
+                    <Image source={AppImages.lunch} style={styles.myIcon} />
+                    <Text style={styles.text}>Lunch</Text>
                 </View>
                 <View style={styles.box}>
-                    <Image source={AppImages.dosa} style={styles.myIcon} />
-                    <Text style={styles.text}>Dosa</Text>
+                    <Image source={AppImages.dinner} style={styles.myIcon} />
+                    <Text style={styles.text}>Dinner</Text>
                 </View>
                 <View style={styles.box}>
-                    <Image source={AppImages.taco} style={styles.myIcon} />
-                    <Text style={styles.text}>Taco</Text>
+                    <Image source={AppImages.fastFood} style={styles.myIcon} />
+                    <Text style={styles.text}>FastFood</Text>
                 </View>
 
             </ScrollView>
@@ -40,7 +40,7 @@ export default Categories
 const styles = StyleSheet.create({
     container: {
         backgroundColor: color.col1,
-        width: '90%',
+        width: '100%',
         elevation: 10,
         borderRadius: 10,
     },

@@ -25,5 +25,17 @@ module.exports = {
         borderBottomColor:'#E0E0E0',
         borderBottomWidth:2,
         marginVertical:20
+    },
+    veg:{
+        backgroundColor:'green',
+        width:20,
+        height:20,
+        borderRadius:5
+    },
+    nonVeg: {
+        backgroundColor:'red',
+        width:20,
+        height:20,
+        borderRadius:5
     }
 }

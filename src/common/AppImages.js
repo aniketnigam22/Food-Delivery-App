@@ -11,4 +11,11 @@ export const AppImages = {
     slider1: require('../assets/images/img1.png'),
     slider2: require('../assets/images/img2.png'),
     slider3: require('../assets/images/img3.png'),
+    starter: require('../assets/images/starter.webp'),
+    breakfast: require('../assets/images/breakfast.png'),
+    lunch: require('../assets/images/lunch.png'),
+    dinner: require('../assets/images/dinner.png'),
+    fastFood: require('../assets/images/fastfood.png'),
+
+
 }
