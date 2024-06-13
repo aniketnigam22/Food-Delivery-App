@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput, StatusBar, StyleSheet } from 'react-native'
 import HomeHeadNav from '../components/HomeHeadNav'
 import Categories from '../components/Categories'
 import OfferSlider from '../components/OfferSlider'
 import { Icon } from 'react-native-elements';
 import { color } from '../global/GlobalStyle'
+import firestore from '@react-native-firebase/firestore'
 
 const HomeScreen = () => {
+    const [foodData,setFoodData]= useState([]);
+    const foodRef = firestore().collection('FoodData')
+
+    useEffect(() => {
+         foodRef.onSnapshot(snapshot => {
+            setFoodData(snapshot.docs.map(doc => doc.data()))
+         })
+    }, [])
+
+    console.log(foodData)
     return (
         <>
             <View style={styles.container}>
