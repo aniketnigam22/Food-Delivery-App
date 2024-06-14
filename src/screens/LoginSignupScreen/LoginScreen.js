@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
 import { btn1, color, hr80, title } from '../../global/GlobalStyle'
 import { Icon } from 'react-native-elements';
+import auth from '@react-native-firebase/auth';
+
 
 
 const LoginScreen = ({ navigation }) => {
@@ -9,21 +11,48 @@ const LoginScreen = ({ navigation }) => {
     const [passwordFocus, setPasswordFocus] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
 
+    const [email, setEmail] = useState('')
+    const [passward, setPassward] = useState('')
+    const [customError, setCustomeError] = useState('')
+
+    const handleLogin = () => {
+        console.log('handle click called')
+        auth().signInWithEmailAndPassword(email, passward)
+            .then((userCredentials) => {
+                var user = userCredentials.user;
+                console.log(user)
+                console.log('Logged In Successfully')
+            })
+            .catch((error) => {
+                var msg = error.message
+                console.log(`Error message while login ${msg}`)
+
+                if (error.message == '[auth/invalid-email] The email address is badly formatted.') {
+                    setCustomeError('Invalid Email')
+                }
+                else {
+                    setCustomeError('Incorrect Email or Password')
+                }
+            })
+    }
     return (
         <>
             <View style={styles.container}>
                 <Text style={styles.head1}>Sign In</Text>
-
+                {customError !== '' && <Text style={styles.errorMessage}>{customError}</Text>}
                 <View style={styles.inputOut}>
                     <Icon name="people" size={30} color={emailFocus === true ? color.text1 : color.text2} />
                     <TextInput
                         style={styles.input}
                         placeholder='Email'
                         placeholderTextColor={color.text2}
+                        onChangeText={(text) => setEmail(text)}
                         onFocus={() => {
                             setEmailFoucs(true)
                             setShowPassword(false)
                             setPasswordFocus(false)
+                            setCustomeError('')
+
                         }}
                     />
                 </View>
@@ -38,10 +67,12 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         style={styles.input}
                         placeholder='Password'
+                        onChangeText={(text) => setPassward(text)}
                         onFocus={() => {
                             setEmailFoucs(false)
                             setPasswordFocus(true)
-                            
+                            setCustomeError('')
+
                         }}
                         placeholderTextColor={color.text2}
 
@@ -58,11 +89,9 @@ const LoginScreen = ({ navigation }) => {
                     />
                 </View>
 
-                <TouchableOpacity 
-                style={btn1}
-                onPress={() => {
-                    navigation.navigate('HomeScreen')
-                }}
+                <TouchableOpacity
+                    style={btn1}
+                    onPress={ handleLogin }
                 >
                     <Text style={styles.singInButton}>Sign in</Text>
                 </TouchableOpacity>
@@ -122,7 +151,7 @@ const styles = StyleSheet.create({
         fontSize: 19,
         marginLeft: 10,
         width: '80%',
-        color:color.text3
+        color: color.text3
     },
     singInButton: {
         color: color.col1,
@@ -160,7 +189,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: color.text1,
         fontWeight: 'bold'
-    }
+    },
+    errorMessage: {
+        color: "red",
+        fontSize: 18,
+        textAlign: 'center',
+        margin: 10,
+        borderColor: 'red',
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10
+      },
 })
 
 export default LoginScreen
