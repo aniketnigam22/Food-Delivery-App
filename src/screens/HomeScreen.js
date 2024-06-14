@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         // height:'6%',
         backgroundColor: color.col1,
-        
+
     },
     searchResultInner: {
         width: '100%'

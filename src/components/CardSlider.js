@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     },
     cardOut: {
         width: '100%',
-
     },
     card: {
         width: 300,

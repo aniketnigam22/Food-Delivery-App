@@ -1,0 +1,80 @@
+steps to integrate firebase in react native appliation 
+
+step1. go to website https://rnfirebase.io/  this is a react native firebase websites
+step2. install the firebase for react native by command ' yarn add @react-native-firebase/app '
+step3. install firestore by the command yarn add @react-native-firebase/firestore
+step4. now again install the app by typing a 
+step5. now come to the website of firebase https://console.firebase.google.com/ where you have step up your project food-delevery-app
+step6. come inside food-delevery-app and look for add app button click on the button 
+step7. click on the android logo after clicking add app the very first thing they will is package name write the package name of your react native app 
+       you will get inside android folder in your project in vs code and paste the package name
+step8. give the nick name of the app - Food app
+step9. now register the app
+step10. Now you will be shown a download button download that configuration file of google-service-json now what you have to do is that download the file 
+        and you have to paste the file in this location /home/infra/RN/FoodDelivery/android/app , it means you have to paste the file in your project in 
+        app foler inside android in your project
+step11. Now you will need to do some configuration inside android folder  basically you have to do configuration in two folders 
+step12. first file is project-level build.gradle and second file is app level build.gradle , you will get project-level build.gradle in android folder and you 
+        you will find app level build.gradle in inside android inside app 
+
+
+step13. android level build.gradle changes
+
+buildscript {
+    ext {
+        buildToolsVersion = "34.0.0"
+        minSdkVersion = 23
+        compileSdkVersion = 34
+        targetSdkVersion = 34
+        ndkVersion = "26.1.10909125"
+        kotlinVersion = "1.9.22"
+    }
+    repositories {
+        google()
+        mavenCentral()//add this if not added
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        //added code
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"
+
+
+step 14. app level build.gradle changes
+
+// <project>/<app-module>/build.gradle
+
+plugins {
+    id 'com.android.application'
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
+}
+
+android {
+    // Your existing android configuration
+}
+
+dependencies {
+    // Import the Firebase BoM (Bill of Materials)
+    implementation platform('com.google.firebase:firebase-bom:33.1.0')
+
+    // Add dependencies for Firebase products you want to use.
+    // For example, to use Firebase Firestore and Authentication:
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-auth'
+}
+
+// Apply the Google services plugin at the bottom of the file
+apply plugin: 'com.google.gms.google-services'
+
+step15. after doing these changes install the project again by clicking a 
+
+step16. creae a FirebaseConfig file for doing configuration
+
+step17. you can read the comments in the codee to understand about the code
+
