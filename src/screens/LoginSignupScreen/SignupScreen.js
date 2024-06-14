@@ -31,6 +31,27 @@ const SignupScreen = ({ navigation }) => {
   const [successMsg, setSuccessMsg] = useState(null)
 
   const handleSignup = () => {
+
+    if(name == '') {
+      setCustomeError('Name cannot be empty')
+      return
+    }
+    if(email == '') {
+      setCustomeError('Email cannot be empty')
+      return
+    }
+    if(phone == '') {
+      setCustomeError('Phone cannot be empty')
+      return
+    }
+    if(passward == '') {
+      setCustomeError('Password cannot be empty')
+      return
+    }
+    if(confirmPassward == '') {
+      setCustomeError('Confirm Password cannot be empty')
+      return
+    }
     console.log(customError)
     const formData = {
       name: name,

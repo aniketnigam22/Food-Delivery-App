@@ -21,6 +21,7 @@ const LoginScreen = ({ navigation }) => {
             .then((userCredentials) => {
                 var user = userCredentials.user;
                 console.log(user)
+                setCustomeError('')
                 console.log('Logged In Successfully')
             })
             .catch((error) => {
