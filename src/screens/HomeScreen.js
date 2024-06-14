@@ -13,13 +13,17 @@ const HomeScreen = () => {
     const [vegData, setVegData] = useState([])
     const [nonVegData, setNonVegData] = useState([])
     const [searchText, setSearchText] = useState('')
+    
 
 
 
-
+    //This line creates a reference to a specific collection in your Firestore database
     const foodRef = firestore().collection('FoodData')
 
     useEffect(() => {
+        //.onSnapshot method is used to watch for changes in a Firestore collection in real-time. and it will trigger when there is any crud operation in collection
+        //snapshot.docs array of data within the collecetion and .map() is a function which is used to iterate over each value
+        //doc => doc.data() this means retriving the actual data from the document
         foodRef.onSnapshot(snapshot => {
             setFoodData(snapshot.docs.map(doc => doc.data()))
         })
@@ -32,6 +36,7 @@ const HomeScreen = () => {
     useEffect(() => {
         setNonVegData(foodData.filter(item => item.foodType === 'non-veg'))
     }, [foodData])
+
 
 
 
