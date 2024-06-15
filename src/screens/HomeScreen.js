@@ -8,7 +8,7 @@ import { color } from '../global/GlobalStyle'
 import firestore from '@react-native-firebase/firestore'
 import CardSlider from '../components/CardSlider'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const [foodData, setFoodData] = useState([]);
     const [vegData, setVegData] = useState([])
     const [nonVegData, setNonVegData] = useState([])
@@ -51,7 +51,7 @@ const HomeScreen = () => {
         <>
             <ScrollView style={styles.container}>
                 <StatusBar />
-                <HomeHeadNav />
+                <HomeHeadNav  navigation={navigation}/>
                 <View style={styles.searchBox}>
                     <Icon name="search" size={30} color={color.text1} />
                     <TextInput

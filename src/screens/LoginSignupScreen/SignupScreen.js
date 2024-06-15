@@ -32,34 +32,28 @@ const SignupScreen = ({ navigation }) => {
 
   const handleSignup = () => {
 
-    if(name == '') {
+    if (name == '') {
       setCustomeError('Name cannot be empty')
       return
     }
-    if(email == '') {
+    if (email == '') {
       setCustomeError('Email cannot be empty')
       return
     }
-    if(phone == '') {
+    if (phone == '') {
       setCustomeError('Phone cannot be empty')
       return
     }
-    if(passward == '') {
+    if (passward == '') {
       setCustomeError('Password cannot be empty')
       return
     }
-    if(confirmPassward == '') {
+    if (confirmPassward == '') {
       setCustomeError('Confirm Password cannot be empty')
       return
     }
     console.log(customError)
-    const formData = {
-      name: name,
-      email: email,
-      phone: phone,
-      passward: passward,
-      address: address
-    }
+   
 
     if (passward != confirmPassward) {
       setCustomeError('Passward do not match')
@@ -72,21 +66,34 @@ const SignupScreen = ({ navigation }) => {
 
     try {
       auth().createUserWithEmailAndPassword(email, passward)
-        .then(() => {
+        .then((userCredentials) => {
           console.log('User created and sign up successfully')
 
-          const userRef = firebase.firestore().collection('UserData')
+          //we are getting the uniqure id
+          console.log(userCredentials?.user?.uid)
 
+          if (userCredentials?.user?.uid) {
+            const userRef = firebase.firestore().collection('UserData')
 
-          userRef.add(formData)
-            .then(() => {
-              console.log('User Data added to firestore while signup')
-              setSuccessMsg('User Created Successfully')
+            const formData = {
+              name: name,
+              email: email,
+              phone: phone,
+              passward: passward,
+              address: address,
+              uid:userCredentials?.user?.uid
+            }
 
-            })
-            .catch((error) => {
-              console.log('Firestore error while saving user data during signup', error.message)
-            })
+            userRef.add(formData)
+              .then(() => {
+                console.log('User Data added to firestore while signup')
+                setSuccessMsg('User Created Successfully')
+
+              })
+              .catch((error) => {
+                console.log('Firestore error while saving user data during signup', error.message)
+              })
+          }
         })
         .catch((error) => {
           console.log(`Error while sign up  inside try or firebase error: ${error.message}`)
@@ -317,7 +324,7 @@ const SignupScreen = ({ navigation }) => {
           <Text style={styles.successMessage}>{successMsg}</Text>
 
           <TouchableOpacity
-            style={[btn1, {marginBottom:10}]}
+            style={[btn1, { marginBottom: 10 }]}
             onPress={() => navigation.navigate('LoginScreen')}
           >
             <Text style={styles.singInButton}>Sign In</Text>
@@ -420,10 +427,10 @@ const styles = StyleSheet.create({
   },
   container1: {
     flex: 1,
-    width:'100%',
-    alignItems:'center',
-    justifyContent:'center',
-    marginTop:60
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 60
   },
   successMessage: {
     color: "green",

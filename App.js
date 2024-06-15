@@ -7,6 +7,7 @@ import SignupScreen from './src/screens/LoginSignupScreen/SignupScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
+import UserProfile from './src/screens/UserProfile';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
-
+          <Stack.Screen name="UserProfile" component={UserProfile} />
         </Stack.Navigator>
       </NavigationContainer>
 
