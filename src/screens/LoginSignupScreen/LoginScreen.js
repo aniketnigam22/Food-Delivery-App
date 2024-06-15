@@ -20,9 +20,10 @@ const LoginScreen = ({ navigation }) => {
         auth().signInWithEmailAndPassword(email, passward)
             .then((userCredentials) => {
                 var user = userCredentials.user;
-                console.log(user)
+                // console.log(user)
                 setCustomeError('')
                 console.log('Logged In Successfully')
+                navigation.navigate('WelcomeScreen')
             })
             .catch((error) => {
                 var msg = error.message
