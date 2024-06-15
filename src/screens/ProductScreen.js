@@ -98,8 +98,7 @@ const styles = StyleSheet.create({
     backButton: {
         fontSize: 24,
         color: 'white',
-        marginBottom:4
-        
+        marginBottom:4        
     },
     container: {
         flex: 1,
