@@ -82,9 +82,9 @@ const HomeScreen = ({navigation}) => {
                 }
                 <Categories />
                 <OfferSlider />
-                <CardSlider title={'Todays Special'} data={foodData} />
-                <CardSlider title={'Non Veg Love'} data={nonVegData} />
-                <CardSlider title={'Veg Hunger'} data={vegData} />
+                <CardSlider title={'Todays Special'} data={foodData} navigation={navigation}/>
+                <CardSlider title={'Non Veg Love'} data={nonVegData}  navigation={navigation}/>
+                <CardSlider title={'Veg Hunger'} data={vegData}   navigation={navigation}/> 
 
             </ScrollView>
         </>

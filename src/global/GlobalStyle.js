@@ -37,5 +37,17 @@ module.exports = {
         width:20,
         height:20,
         borderRadius:5
-    }
+    },
+    btn2:{
+        width:150,
+        height:50,
+        backgroundColor:'red',
+        borderRadius:10,
+        alignItems:'center',
+        justifyContent:'center',
+        elevation:10,
+        color:'white',
+        marginVertical:5,
+        marginHorizontal:15
+    },
 }

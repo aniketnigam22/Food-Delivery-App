@@ -3,7 +3,14 @@ import React from 'react'
 import { Image } from 'react-native'
 import { color, nonVeg, veg } from '../global/GlobalStyle'
 
-const CardSlider = ({ title, data }) => {
+const CardSlider = ({ title, data, navigation}) => {
+
+    const openProductPage = (item) => {
+       console.log(item)
+       //here you are navigatig to produect screen and also passing all the data of item
+       //suppose someone click on the burger slide then all the data of the burger will be passed to the product page
+       navigation.navigate('ProductScreen', item)
+    }
 
     return (
         <View style={styles.container}>
@@ -14,30 +21,34 @@ const CardSlider = ({ title, data }) => {
                 showsHorizontalScrollIndicator={false}
                 data={data}
                 renderItem={({ item }) => (
-                    <View style={styles.card}>
-                        <View style={styles.s1}>
-                            <Image
-                                source={{
-                                    uri: item.foodImageUrl
-                                }}
-                                style={styles.cardImgIn}
-                            />
-                        </View>
-
-                        <View style={styles.s2}>
-                            <Text style={styles.txt1}>{item.foodName}</Text>
-                            <View style={styles.s2In}>
-                                <Text style={styles.txt2}>{'Rs.' + item.foodPrice + '/'}</Text>
-                                {
-                                    item.foodType == 'veg' ? <View style={veg}></View> : <View style={nonVeg}></View>
-                                }
+                    <TouchableOpacity  onPress={() => {
+                        openProductPage(item)
+                    }}>
+                        <View style={styles.card}>
+                            <View style={styles.s1}>
+                                <Image
+                                    source={{
+                                        uri: item.foodImageUrl
+                                    }}
+                                    style={styles.cardImgIn}
+                                />
                             </View>
-                        </View>
 
-                        <TouchableOpacity style={styles.s3}>
-                            <Text style={styles.btn}>Buy</Text>
-                        </TouchableOpacity>
-                    </View>
+                            <View style={styles.s2}>
+                                <Text style={styles.txt1}>{item.foodName}</Text>
+                                <View style={styles.s2In}>
+                                    <Text style={styles.txt2}>{'Rs.' + item.foodPrice + '/'}</Text>
+                                    {
+                                        item.foodType == 'veg' ? <View style={veg}></View> : <View style={nonVeg}></View>
+                                    }
+                                </View>
+                            </View>
+
+                            <TouchableOpacity style={styles.s3}>
+                                <Text style={styles.btn}>Buy</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </TouchableOpacity>
                 )}
             />
         </View>

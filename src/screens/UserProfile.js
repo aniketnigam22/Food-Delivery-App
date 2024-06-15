@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'red',
-        borderRadius:20
+        borderRadius:20,
+        elevation:15
     },
     backButton: {
         fontSize: 24,
