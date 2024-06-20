@@ -126,15 +126,17 @@ const ProductScreen = ({ navigation, route }) => {
                         <Text style={styles.text4}>Food Quantity</Text>
                         <View style={styles.container2In}>
                             <TouchableOpacity onPress={decreaseQuantity}><Text style={styles.incdecbutton} >-</Text></TouchableOpacity>
-                            <TextInput style={styles.incdecInput} value={quantity} />
+                            <TextInput style={styles.incdecInput} value={quantity} color={'black'} />
                             <TouchableOpacity onPress={increaseQuantity}><Text style={styles.incdecbutton} >+</Text></TouchableOpacity>
                         </View>
                     </View>
-                    <View style={hr80} />
+
                     {
                         data.foodAddonPrice != ""
                             ?
+
                             <View style={styles.container3}>
+                                <View style={hr80} />
                                 <Text style={styles.text4}>Add Extra</Text>
                                 <View style={styles.c3In}>
                                     <Text style={styles.addOntext}>{data.foodAddon}</Text>
@@ -142,7 +144,7 @@ const ProductScreen = ({ navigation, route }) => {
                                 </View>
                                 <View style={styles.container2In}>
                                     <TouchableOpacity onPress={decreaseaddQuantity}><Text style={styles.incdecbutton} >-</Text></TouchableOpacity>
-                                    <TextInput style={styles.incdecInput} value={addOnQuantity} />
+                                    <TextInput style={styles.incdecInput} value={addOnQuantity} color={'black'} />
                                     <TouchableOpacity onPress={increaseaddQuantity}><Text style={styles.incdecbutton} >+</Text></TouchableOpacity>
                                 </View>
                             </View>
@@ -388,10 +390,10 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     c4in: {
-        flexDirection:'row',
-        justifyContent:'space-evenly',
-        alignItems:'center',
-        width:'80%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        width: '80%',
 
     }
 })

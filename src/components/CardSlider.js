@@ -3,6 +3,7 @@ import React from 'react'
 import { Image } from 'react-native'
 import { color, nonVeg, veg } from '../global/GlobalStyle'
 
+
 const CardSlider = ({ title, data, navigation}) => {
 
     const openProductPage = (item) => {
@@ -124,5 +125,5 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: '90%',
         textAlign: 'center'
-    }
+    },
 })

@@ -7,13 +7,14 @@ import { Icon } from 'react-native-elements';
 import { color } from '../global/GlobalStyle'
 import firestore from '@react-native-firebase/firestore'
 import CardSlider from '../components/CardSlider'
+import BottomNav from '../components/BottomNav'
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
     const [foodData, setFoodData] = useState([]);
     const [vegData, setVegData] = useState([])
     const [nonVegData, setNonVegData] = useState([])
     const [searchText, setSearchText] = useState('')
-    
+
 
 
 
@@ -49,44 +50,49 @@ const HomeScreen = ({navigation}) => {
 
     return (
         <>
-            <ScrollView style={styles.container}>
+            <View style={styles.container}>
                 <StatusBar />
-                <HomeHeadNav  navigation={navigation}/>
-                <View style={styles.searchBox}>
-                    <Icon name="search" size={30} color={color.text1} />
-                    <TextInput
-                        placeholder='Search' style={styles.input}
-                        placeholderTextColor={'red'}
-                        onChangeText={(text) => { setSearchText(text) }}
-                    />
+                <HomeHeadNav navigation={navigation} />
+                <View style={styles.bottomNav}>
+                    <BottomNav  navigation={navigation}/>
                 </View>
-                {
-                    searchText != ''
-                    &&
-                    <View style={styles.searchReasultOuter}>
-                        <FlatList
-                            style={styles.searchResultInner}
-                            data={foodData}
-                            renderItem={({ item }) => {
-                                if (item.foodName.toLowerCase().includes(searchText.toLowerCase())) {
-                                    return (
-                                        <View style={styles.searchResult}>
-                                            <Text style={styles.searchResultText}>{item.foodName}</Text>
-                                        </View>
-                                    )
-                                }
-                            }}
-
+                <ScrollView>
+                    <View style={styles.searchBox}>
+                        <Icon name="search" size={30} color={color.text1} />
+                        <TextInput
+                            placeholder='Search' style={styles.input}
+                            placeholderTextColor={'red'}
+                            onChangeText={(text) => { setSearchText(text) }}
                         />
                     </View>
-                }
-                <Categories />
-                <OfferSlider />
-                <CardSlider title={'Todays Special'} data={foodData} navigation={navigation}/>
-                <CardSlider title={'Non Veg Love'} data={nonVegData}  navigation={navigation}/>
-                <CardSlider title={'Veg Hunger'} data={vegData}   navigation={navigation}/> 
+                    {
+                        searchText != ''
+                        &&
+                        <View style={styles.searchReasultOuter}>
+                            <FlatList
+                                style={styles.searchResultInner}
+                                data={foodData}
+                                renderItem={({ item }) => {
+                                    if (item.foodName.toLowerCase().includes(searchText.toLowerCase())) {
+                                        return (
+                                            <View style={styles.searchResult}>
+                                                <Text style={styles.searchResultText}>{item.foodName}</Text>
+                                            </View>
+                                        )
+                                    }
+                                }}
 
-            </ScrollView>
+                            />
+                        </View>
+                    }
+                    <Categories />
+                    <OfferSlider />
+                    <CardSlider title={'Todays Special'} data={foodData} navigation={navigation} />
+                    <CardSlider title={'Non Veg Love'} data={nonVegData} navigation={navigation} />
+                    <CardSlider title={'Veg Hunger'} data={vegData} navigation={navigation} />
+                </ScrollView>
+
+            </View>
         </>
     )
 }
@@ -132,6 +138,14 @@ const styles = StyleSheet.create({
     searchResultInner: {
         width: '100%'
     },
+    bottomNav: {
+        position:'absolute',
+        bottom:0,
+        width:'100%',
+        backgroundColor:color.col1,
+        zIndex:1000
+    }
+
 
 })
 export default HomeScreen
