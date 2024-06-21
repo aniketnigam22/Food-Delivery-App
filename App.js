@@ -8,14 +8,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
 import ProductScreen from './src/screens/ProductScreen';
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 
-function App() {
+const App = () => {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
-    // Request permissions on iOS (Optional for Android)
-    async function requestUserPermission() {
+    // Request user permission for notifications
+    const requestUserPermission = async () => {
       const authStatus = await messaging().requestPermission();
       const enabled =
         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -24,53 +24,48 @@ function App() {
       if (enabled) {
         console.log('Authorization status:', authStatus);
       }
-    }
+    };
 
     requestUserPermission();
 
-    // Foreground state messages
+    // Handle background and foreground notifications
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
 
-    // Background and quit state messages
-    messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log('Message handled in the background!', remoteMessage);
-    });
-
-    // Notification when app is opened from a quit state
-    messaging()
-      .getInitialNotification()
-      .then(remoteMessage => {
-        if (remoteMessage) {
-          console.log(
-            'Notification caused app to open from quit state:',
-            remoteMessage.notification,
-          );
-        }
-      });
-
     return unsubscribe;
   }, []);
 
+  useEffect(() => {
+    // Get the device token
+    const getToken = async () => {
+      const token = await messaging().getToken();
+      console.log('Device FCM Token:', token);
+    };
+
+    getToken();
+
+    return messaging().onTokenRefresh(token => {
+      console.log('Device FCM Token refreshed:', token);
+    });
+  }, []);
+
   return (
-    <>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false
-          }}
-          initialRouteName='WelcomeScreen'
-        >
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-          <Stack.Screen name="SignupScreen" component={SignupScreen} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Screen name="UserProfile" component={UserProfile} />
-          <Stack.Screen name="ProductScreen" component={ProductScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName='WelcomeScreen'
+      >
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name="SignupScreen" component={SignupScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name="ProductScreen" component={ProductScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
