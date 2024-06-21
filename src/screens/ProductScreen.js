@@ -23,7 +23,7 @@ const ProductScreen = ({ navigation, route }) => {
 
     const addToCart = () => {
         console.log('add to cart function clicked')
-        //data will be added in the cart with reference to the current user userid
+        // you are calling the data from the UserCart collection which is saved with this userid
         const docRef = firebase.firestore().collection('UserCart').doc(firebase.auth().currentUser.uid)
 
         const data1 = { data, FoodQuantity: quantity, AddOnQuantity: addOnQuantity }

@@ -16,6 +16,9 @@ export const AppImages = {
     lunch: require('../assets/images/lunch.png'),
     dinner: require('../assets/images/dinner.png'),
     fastFood: require('../assets/images/fastfood.png'),
-
-
+    homeIcon: require('../assets/images/homeIcon.png'),
+    mapIcon: require('../assets/images/mapIcon.png'),
+    searchIcon: require('../assets/images/searchIcon.png'),
+    cartIcon: require('../assets/images/cartIcon.png'),
+    deleteIcon: require('../assets/images/deleteIcon.jpg'),
 }

@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
 import ProductScreen from './src/screens/ProductScreen';
+import UserCart from './src/screens/UserCart';
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="UserProfile" component={UserProfile} />
           <Stack.Screen name="ProductScreen" component={ProductScreen} />
-
+          <Stack.Screen name="UserCart" component={UserCart} />
         </Stack.Navigator>
       </NavigationContainer>
 

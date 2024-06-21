@@ -89,7 +89,10 @@ const HomeScreen = ({ navigation }) => {
                     <OfferSlider />
                     <CardSlider title={'Todays Special'} data={foodData} navigation={navigation} />
                     <CardSlider title={'Non Veg Love'} data={nonVegData} navigation={navigation} />
+                    <View style={{marginBottom:50}}>
                     <CardSlider title={'Veg Hunger'} data={vegData} navigation={navigation} />
+
+                    </View>
                 </ScrollView>
 
             </View>
