@@ -10,7 +10,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
 import ProductScreen from './src/screens/ProductScreen';
 
-//home branch
+//home branch at home
 function App() {
 
   const Stack = createNativeStackNavigator();
