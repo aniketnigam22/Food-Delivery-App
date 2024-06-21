@@ -122,7 +122,6 @@ dependencies {
     // Add dependencies for Firebase products you want to use.
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-messaging'
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
