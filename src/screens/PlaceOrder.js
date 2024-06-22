@@ -78,47 +78,47 @@ const PlaceOrder = ({ navigation, route }) => {
         getUserData();
     }, [userLoggedUid]);
 
-   const OrderPlaced = () => {
-    try {
-        const orderId = new Date().getTime().toString();
-        RazorpayCheckout.open({
-            key: "rzp_test_XZXlIZEFXyAYyU",
-            amount: totalCost * 100,
-            image:'',
-            description: "Payment for food delivery",
-            currency: "INR",
-            prefill: {
-                contact: "1234567890", // Replace with a valid phone number
-                email: "harsh.infranix@gmail.com",
-            },
-            theme: { color: color.text1 },
-        }).then(async (res) => {
-            if (res) {
-                const docRef = firebase.firestore().collection('UserOrders').doc(orderId);
-                await docRef.set({
-                    orderId: docRef.id,
-                    orderData: orderData.cart,
-                    orderstatus: 'pending',
-                    ordercost: totalCost,
-                    orderDate: firebase.firestore.FieldValue.serverTimestamp(),
-                    orderAddress: userData.address,
-                    orderPhone: userData.phone,
-                    orderName: userData.name,
-                    orderUserId: userLoggedUid,
-                    orderpayment: 'online',
-                    paymentStatus: 'paid'
-                });
-                Alert.alert('Order Placed');
-            }
-        }).catch((err) => {
-            console.error("Razorpay Checkout Error:", err);
-            Alert.alert("Error", err.description || JSON.stringify(err));
-        });
-    } catch (error) {
-        console.error("Error in OrderPlaced function:", error);
-        Alert.alert("Error2", error.message || JSON.stringify(error));
-    }
-};
+    const OrderPlaced = () => {
+        try {
+            const orderId = new Date().getTime().toString();
+            RazorpayCheckout.open({
+                key: "rzp_test_XZXlIZEFXyAYyU",
+                amount: totalCost * 100,
+                image: '',
+                description: "Payment for food delivery",
+                currency: "INR",
+                prefill: {
+                    contact: "1234567890", // Replace with a valid phone number
+                    email: "harsh.infranix@gmail.com",
+                },
+                theme: { color: 'red' },
+            }).then(async (res) => {
+                if (res) {
+                    const docRef = firebase.firestore().collection('UserOrders').doc(orderId);
+                    await docRef.set({
+                        orderId: docRef.id,
+                        orderData: orderData.cart,
+                        orderstatus: 'pending',
+                        ordercost: totalCost,
+                        orderDate: firebase.firestore.FieldValue.serverTimestamp(),
+                        orderAddress: userData.address,
+                        orderPhone: userData.phone,
+                        orderName: userData.name,
+                        orderUserId: userLoggedUid,
+                        orderpayment: 'online',
+                        paymentStatus: 'paid'
+                    });
+                    Alert.alert('Order Placed');
+                }
+            }).catch((err) => {
+                console.error("Razorpay Checkout Error:", err);
+                Alert.alert("Error", err.description || JSON.stringify(err));
+            });
+        } catch (error) {
+            console.error("Error in OrderPlaced function:", error);
+            Alert.alert("Error2", error.message || JSON.stringify(error));
+        }
+    };
 
 
     console.log(orderData.cart)
