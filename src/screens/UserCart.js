@@ -132,7 +132,7 @@ const UserCart = ({ navigation }) => {
                     <Text style={styles.text6}>Rs.{totalCost}/-</Text>
 
                 </View>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('PlaceOrder', {cartData})}>
                     <Text style={styles.btnText}>Place Order</Text>
                 </TouchableOpacity>
             </View>
