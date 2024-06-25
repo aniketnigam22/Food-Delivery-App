@@ -4,14 +4,14 @@ import { AppImages } from '../common/AppImages'
 import { color } from '../global/GlobalStyle'
 
 
-const BottomNav = ({ navigation }) => {
+const BottomNav = ({ navigation,  onFocusSearch  }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.btnCon1} onPress={() => navigation.navigate('HomeScreen')}>
         <Image source={AppImages.homeIcon} style={styles.icon} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btnCon1} onPress={() => navigation.navigate('HomeScreen')}>
+      <TouchableOpacity style={styles.btnCon1} onPress={onFocusSearch}>
         <Image source={AppImages.searchIcon} style={styles.search} />
       </TouchableOpacity>
 

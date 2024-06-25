@@ -362,14 +362,14 @@ const styles = StyleSheet.create({
     backgroundColor: color.col1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    // paddingVertical: 2,
     elevation: 20,
     alignItems: 'center'
   },
   input: {
     fontSize: 19,
     marginLeft: 10,
-    width: '80%',
+    width: '74%',
     color: 'black'
   },
   singInButton: {

@@ -6,10 +6,10 @@ import { color } from '../global/GlobalStyle'
 const HomeHeadNav = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <Image source={AppImages.drawer} style={styles.icons} />
+           <Image source={AppImages.FoodIcon} style={styles.foodIcon} />
             <View style={styles.containerin}>
                 <Text style={styles.mytext}>Foodie</Text>
-                <Image source={AppImages.FoodIcon} style={styles.foodIcon} />
+                
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
                 <Image source={AppImages.userIcon} style={styles.icons} />

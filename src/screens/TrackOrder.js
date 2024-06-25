@@ -61,8 +61,8 @@ const TrackOrder = ({ navigation }) => {
                         return (
                             <View style={styles.order} key={index}>
                                 <Text style={styles.orderindex}>{index + 1}</Text>
-                                <Text style={styles.ordertxt2}>order id : {order.orderid}</Text>
-                                <Text style={styles.ordertxt2}>order date : {convertDate(order.orderDate)}</Text>
+                                <Text style={styles.ordertxt2}>Order Id: {order.orderid}</Text>
+                                <Text style={styles.ordertxt2}>Order Date : {convertDate(order.orderDate)}</Text>
                                 {order.orderstatus == 'ontheway' && <Text style={styles.orderotw}>Your order is on the way </Text>}
                                 {order.orderstatus == 'delivered' && <Text style={styles.orderdelivered}>Your order is delivered </Text>}
                                 {order.orderstatus == 'cancelled' && <Text style={styles.ordercancelled}>Your order is cancelled </Text>}

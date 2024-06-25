@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { View, Text, TextInput, StatusBar, StyleSheet, ScrollView, FlatList } from 'react-native'
 import HomeHeadNav from '../components/HomeHeadNav'
 import Categories from '../components/Categories'
@@ -15,7 +15,12 @@ const HomeScreen = ({ navigation }) => {
     const [nonVegData, setNonVegData] = useState([])
     const [searchText, setSearchText] = useState('')
 
-
+    const inputRef = useRef(null);
+    const focusOnInput = () => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    };
 
 
     //This line creates a reference to a specific collection in your Firestore database
@@ -38,10 +43,6 @@ const HomeScreen = ({ navigation }) => {
         setNonVegData(foodData.filter(item => item.foodType === 'non-veg'))
     }, [foodData])
 
-
-
-
-
     // console.log('all data',foodData)
     // console.log('veg data', vegData)
     // console.log('non veg data', nonVegData)
@@ -54,17 +55,19 @@ const HomeScreen = ({ navigation }) => {
                 <StatusBar />
                 <HomeHeadNav navigation={navigation} />
                 <View style={styles.bottomNav}>
-                    <BottomNav  navigation={navigation}/>
+                    <BottomNav navigation={navigation} />
                 </View>
-                <ScrollView>
-                    <View style={styles.searchBox}>
+                <View style={styles.searchBox}>
                         <Icon name="search" size={30} color={color.text1} />
                         <TextInput
+                            ref={inputRef}
                             placeholder='Search' style={styles.input}
                             placeholderTextColor={'red'}
                             onChangeText={(text) => { setSearchText(text) }}
                         />
                     </View>
+                <ScrollView>
+                    
                     {
                         searchText != ''
                         &&
@@ -81,7 +84,6 @@ const HomeScreen = ({ navigation }) => {
                                         )
                                     }
                                 }}
-
                             />
                         </View>
                     }
@@ -89,8 +91,8 @@ const HomeScreen = ({ navigation }) => {
                     <OfferSlider />
                     <CardSlider title={'Todays Special'} data={foodData} navigation={navigation} />
                     <CardSlider title={'Non Veg Love'} data={nonVegData} navigation={navigation} />
-                    <View style={{marginBottom:50}}>
-                    <CardSlider title={'Veg Hunger'} data={vegData} navigation={navigation} />
+                    <View style={{ marginBottom: 50 }}>
+                        <CardSlider title={'Veg Hunger'} data={vegData} navigation={navigation} />
 
                     </View>
                 </ScrollView>
@@ -142,11 +144,11 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     bottomNav: {
-        position:'absolute',
-        bottom:0,
-        width:'100%',
-        backgroundColor:color.col1,
-        zIndex:1000
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        backgroundColor: color.col1,
+        zIndex: 1000
     }
 
 
