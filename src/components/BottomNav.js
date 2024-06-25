@@ -19,7 +19,7 @@ const BottomNav = ({ navigation }) => {
         <Image source={AppImages.cartIcon} style={styles.icon} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btnCon1} onPress={() => navigation.navigate('HomeScreen')}>
+      <TouchableOpacity style={styles.btnCon1} onPress={() => navigation.navigate('TrackOrder')}>
         <Image source={AppImages.mapIcon} style={styles.icon} />
       </TouchableOpacity>
     </View>

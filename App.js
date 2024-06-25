@@ -10,6 +10,7 @@ import UserProfile from './src/screens/UserProfile';
 import ProductScreen from './src/screens/ProductScreen';
 import UserCart from './src/screens/UserCart';
 import PlaceOrder from './src/screens/PlaceOrder';
+import TrackOrder from './src/screens/TrackOrder';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Stack.Screen name="ProductScreen" component={ProductScreen} />
           <Stack.Screen name="UserCart" component={UserCart} />
           <Stack.Screen name="PlaceOrder" component={PlaceOrder} />
+          <Stack.Screen name="TrackOrder" component={TrackOrder} />
         </Stack.Navigator>
       </NavigationContainer>
 

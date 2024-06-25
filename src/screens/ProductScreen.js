@@ -4,8 +4,6 @@ import { btn2, color, hr80, nonVeg, veg } from '../global/GlobalStyle';
 import { FieldValue, firebase } from '@react-native-firebase/firestore';
 
 
-
-
 //route is used to get the data when you pass the data form the navigation
 const ProductScreen = ({ navigation, route }) => {
 
