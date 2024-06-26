@@ -9,6 +9,8 @@ const HomeHeadNav = ({ navigation }) => {
            <Image source={AppImages.FoodIcon} style={styles.foodIcon} />
             <View style={styles.containerin}>
                 <Text style={styles.mytext}>Foodie</Text>
+               {/* <Image source={AppImages.appLogo} style={styles.logoHead} /> */}
+
                 
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10,
         backgroundColor: color.col1,
+        // backgroundColor:'red',
         alignItems: 'center',
         elevation: 20,
         borderBottomLeftRadius: 20,
@@ -50,5 +53,10 @@ const styles = StyleSheet.create({
     foodIcon: {
         height: 40,
         width: 40
+    },
+    logoHead: {
+        height:20,
+        width:250,
+        // backgroundColor:'red'
     }
 })

@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, } from 'react-native'
+import { StatusBar, StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import HomeHeadNav from '../components/HomeHeadNav'
 import BottomNav from '../components/BottomNav'
@@ -9,11 +9,13 @@ import { firebase } from '@react-native-firebase/firestore'
 
 const TrackOrder = ({ navigation }) => {
     const [orders, setOrders] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const getorders = async () => {
         const ordersRef = firebase.firestore().collection('UserOrders').where('orderUserId', '==', firebase.auth().currentUser.uid);
         ordersRef.onSnapshot(snapshot => {
             setOrders(snapshot.docs.map(doc => doc.data()))
+            setLoading(false)
         })
     }
 
@@ -50,81 +52,90 @@ const TrackOrder = ({ navigation }) => {
 
             <ScrollView style={styles.containerin}>
                 <Text style={styles.head1}>Track Orders</Text>
-                <View>
-                    {orders.sort(
-                       (a, b) => {
-                        const aDate = a.orderDate ? a.orderDate.seconds : 0;
-                        const bDate = b.orderDate ? b.orderDate.seconds : 0;
-                        return bDate - aDate;
-                    }
-                    ).map((order, index) => {
-                        return (
-                            <View style={styles.order} key={index}>
-                                <Text style={styles.orderindex}>{index + 1}</Text>
-                                <Text style={styles.ordertxt2}>Order Id: {order.orderid}</Text>
-                                <Text style={styles.ordertxt2}>Order Date : {convertDate(order.orderDate)}</Text>
-                                {order.orderstatus == 'ontheway' && <Text style={styles.orderotw}>Your order is on the way </Text>}
-                                {order.orderstatus == 'delivered' && <Text style={styles.orderdelivered}>Your order is delivered </Text>}
-                                {order.orderstatus == 'cancelled' && <Text style={styles.ordercancelled}>Your order is cancelled </Text>}
-                                {order.orderstatus == 'pending' && <Text style={styles.orderpending}>Your order is pending </Text>}
+
+                {
+                    loading == true
+                        ?
+                        <View style={styles.indicator}>
+                            <ActivityIndicator size="large" color="red" />
+                        </View>
+                        :
+                        <View>
+                            {orders.sort(
+                                (a, b) => {
+                                    const aDate = a.orderDate ? a.orderDate.seconds : 0;
+                                    const bDate = b.orderDate ? b.orderDate.seconds : 0;
+                                    return bDate - aDate;
+                                }
+                            ).map((order, index) => {
+                                return (
+                                    <View style={styles.order} key={index}>
+                                        <Text style={styles.orderindex}>{index + 1}</Text>
+                                        <Text style={styles.ordertxt2}>Order Id: {order.orderid}</Text>
+                                        <Text style={styles.ordertxt2}>Order Date : {convertDate(order.orderDate)}</Text>
+                                        {order.orderstatus == 'ontheway' && <Text style={styles.orderotw}>Your order is on the way </Text>}
+                                        {order.orderstatus == 'delivered' && <Text style={styles.orderdelivered}>Your order is delivered </Text>}
+                                        {order.orderstatus == 'cancelled' && <Text style={styles.ordercancelled}>Your order is cancelled </Text>}
+                                        {order.orderstatus == 'pending' && <Text style={styles.orderpending}>Your order is pending </Text>}
 
 
-                                <View style={styles.row1}>
-                                    <Text style={styles.ordertxt1}>Delivery Agent name & contact</Text>
-                                    {
-                                        order.deliveryboy_name ? <Text style={styles.ordertxt2}>{order.deliveryboy_name} : {order.deliveryboy_contact}</Text> : <Text style={styles.ordertxt2}>Not Assigned</Text>
-                                    }
-                                    {
-                                        order.deliveryboy_phone ? <Text style={styles.ordertxt2}>{order.deliveryboy_phone}</Text> : null
-                                    }
-                                </View>
-                                <FlatList style={styles.c1} data={order.orderdata} renderItem={
-                                    ({ item }) => {
-                                        return (
-                                            <View style={styles.rowout}>
-                                                <View style={styles.row}>
-                                                    <View style={styles.left}>
-                                                        <Text style={styles.qty}>{item.Foodquantity}</Text>
-                                                        <Text style={styles.title}>{item.data.foodName}</Text>
-                                                        <Text style={styles.price1}>₹{item.data.foodPrice}</Text>
-                                                    </View>
-                                                    <View style={styles.right}>
-                                                        <Text style={styles.totalprice}>₹{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)}</Text>
-                                                    </View>
-                                                </View>
+                                        <View style={styles.row1}>
+                                            <Text style={styles.ordertxt1}>Delivery Agent name & contact</Text>
+                                            {
+                                                order.deliveryboy_name ? <Text style={styles.ordertxt2}>{order.deliveryboy_name} : {order.deliveryboy_contact}</Text> : <Text style={styles.ordertxt2}>Not Assigned</Text>
+                                            }
+                                            {
+                                                order.deliveryboy_phone ? <Text style={styles.ordertxt2}>{order.deliveryboy_phone}</Text> : null
+                                            }
+                                        </View>
+                                        <FlatList style={styles.c1} data={order.orderdata} renderItem={
+                                            ({ item }) => {
+                                                return (
+                                                    <View style={styles.rowout}>
+                                                        <View style={styles.row}>
+                                                            <View style={styles.left}>
+                                                                <Text style={styles.qty}>{item.Foodquantity}</Text>
+                                                                <Text style={styles.title}>{item.data.foodName}</Text>
+                                                                <Text style={styles.price1}>₹{item.data.foodPrice}</Text>
+                                                            </View>
+                                                            <View style={styles.right}>
+                                                                <Text style={styles.totalprice}>₹{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)}</Text>
+                                                            </View>
+                                                        </View>
 
-                                                <View style={styles.row}>
-                                                    <View style={styles.left}>
-                                                        <Text style={styles.qty}>{item.Addonquantity}</Text>
-                                                        <Text style={styles.title}>{item.data.foodAddon}</Text>
-                                                        <Text style={styles.price1}>₹{item.data.foodAddonPrice}</Text>
+                                                        <View style={styles.row}>
+                                                            <View style={styles.left}>
+                                                                <Text style={styles.qty}>{item.Addonquantity}</Text>
+                                                                <Text style={styles.title}>{item.data.foodAddon}</Text>
+                                                                <Text style={styles.price1}>₹{item.data.foodAddonPrice}</Text>
+                                                            </View>
+                                                            <View style={styles.right}>
+                                                                <Text style={styles.totalprice}>₹{parseInt(item.Addonquantity) * parseInt(item.data.foodAddonPrice)}</Text>
+                                                            </View>
+                                                        </View>
                                                     </View>
-                                                    <View style={styles.right}>
-                                                        <Text style={styles.totalprice}>₹{parseInt(item.Addonquantity) * parseInt(item.data.foodAddonPrice)}</Text>
-                                                    </View>
-                                                </View>
-                                            </View>
-                                        )
-                                    }
-                                } />
-                                <Text style={styles.total}>Total: ₹{order.ordercost}</Text>
-                                {
-                                    order.orderstatus === 'Delivered' ? <Text style={styles.ordertxt3}>Thank you for ordering with us</Text> : null
-                                }
-                                {
-                                    order.orderstatus === 'cancelled' ? <Text style={styles.ordertxt3}>Sorry for the inconvenience</Text> : null
-                                }
-                                {
-                                    order.orderstatus != 'cancelled' && order.orderstatus != 'delivered' ?
-                                        <TouchableOpacity style={styles.cancelbtn} onPress={() => cancelOrder(order)}>
-                                            <Text style={styles.cencelbtnin}>Cancel Order</Text>
-                                        </TouchableOpacity>
-                                        : null
-                                }
-                            </View>
-                        )
-                    })}
-                </View>
+                                                )
+                                            }
+                                        } />
+                                        <Text style={styles.total}>Total: ₹{order.ordercost}</Text>
+                                        {
+                                            order.orderstatus === 'Delivered' ? <Text style={styles.ordertxt3}>Thank you for ordering with us</Text> : null
+                                        }
+                                        {
+                                            order.orderstatus === 'cancelled' ? <Text style={styles.ordertxt3}>Sorry for the inconvenience</Text> : null
+                                        }
+                                        {
+                                            order.orderstatus != 'cancelled' && order.orderstatus != 'delivered' ?
+                                                <TouchableOpacity style={styles.cancelbtn} onPress={() => cancelOrder(order)}>
+                                                    <Text style={styles.cencelbtnin}>Cancel Order</Text>
+                                                </TouchableOpacity>
+                                                : null
+                                        }
+                                    </View>
+                                )
+                            })}
+                        </View>
+                }
             </ScrollView>
         </View>
     )
@@ -152,7 +163,7 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         width: '100%',
         height: '100%',
-        marginBottom: 100,
+        marginBottom: 60,
     },
     head1: {
         fontSize: 30,
@@ -327,6 +338,11 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         paddingHorizontal: 20,
         alignSelf: 'center',
-    }
+    },
+    indicator: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
 
 })

@@ -15,8 +15,8 @@ const OfferSlider = () => {
                     showsButtons={true}
                     activeDotColor={color.text1}
                     dotColor={color.text2}
-                    nextButton={<Text style={styles.buttonText}>{`>`}</Text>}
-                    prevButton={<Text style={styles.buttonText}>{`<`}</Text>}
+                    nextButton={<Text style={styles.buttonText}>{`→`}</Text>}
+                    prevButton={<View style={styles.buttonContainer}><Text style={styles.buttonText}>{`←`}</Text></View>}
                 >
                     <View style={styles.slide}>
                         <Image source={AppImages.slider1} style={styles.image} />
@@ -60,11 +60,12 @@ const styles = StyleSheet.create({
     buttonText: {
         color: color.text1,
         fontSize: 30,
-        backgroundColor:'white',
-        borderRadius:20,
-        width:40,
-        height:40,
-        textAlign:'center',
-        // elevation:20
-    }
+        backgroundColor: 'white',
+        borderRadius: 30,
+        width: 40,
+        height: 48,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        paddingBottom: 15
+    },
 })

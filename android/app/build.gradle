@@ -91,6 +91,16 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+
+         release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+            storeFile file('my-release-key.keystore')  // Path to your keystore file
+             storePassword 'Foodapp'             // Your single password used for the keystore
+             keyAlias 'my-key-alias'                   // The alias you used when creating the keystore
+             keyPassword 'Foodapp'               // The same password used for the key alias
+            }
+           
+        }
     }
     buildTypes {
         debug {
@@ -122,6 +132,7 @@ dependencies {
     // Add dependencies for Firebase products you want to use.
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-auth'
+ 
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

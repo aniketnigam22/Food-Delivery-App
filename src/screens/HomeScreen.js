@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, TextInput, StatusBar, StyleSheet, ScrollView, FlatList } from 'react-native'
+import { View, Text, TextInput, StatusBar, StyleSheet, ScrollView, FlatList, ActivityIndicator } from 'react-native'
 import HomeHeadNav from '../components/HomeHeadNav'
 import Categories from '../components/Categories'
 import OfferSlider from '../components/OfferSlider'
@@ -9,11 +9,14 @@ import firestore from '@react-native-firebase/firestore'
 import CardSlider from '../components/CardSlider'
 import BottomNav from '../components/BottomNav'
 
+
+
 const HomeScreen = ({ navigation }) => {
     const [foodData, setFoodData] = useState([]);
     const [vegData, setVegData] = useState([])
     const [nonVegData, setNonVegData] = useState([])
     const [searchText, setSearchText] = useState('')
+    const [loading, setLoading] = useState(true)
 
     const inputRef = useRef(null);
     const focusOnInput = () => {
@@ -32,7 +35,10 @@ const HomeScreen = ({ navigation }) => {
         //doc => doc.data() this means retriving the actual data from the document
         foodRef.onSnapshot(snapshot => {
             setFoodData(snapshot.docs.map(doc => doc.data()))
+            setLoading(false)
         })
+
+       
     }, [])
 
     useEffect(() => {
@@ -58,16 +64,16 @@ const HomeScreen = ({ navigation }) => {
                     <BottomNav navigation={navigation} />
                 </View>
                 <View style={styles.searchBox}>
-                        <Icon name="search" size={30} color={color.text1} />
-                        <TextInput
-                            ref={inputRef}
-                            placeholder='Search' style={styles.input}
-                            placeholderTextColor={'red'}
-                            onChangeText={(text) => { setSearchText(text) }}
-                        />
-                    </View>
+                    <Icon name="search" size={30} color={color.text1} />
+                    <TextInput
+                        ref={inputRef}
+                        placeholder='Search' style={styles.input}
+                        placeholderTextColor={'red'}
+                        onChangeText={(text) => { setSearchText(text) }}
+                    />
+                </View>
                 <ScrollView>
-                    
+
                     {
                         searchText != ''
                         &&
@@ -89,12 +95,27 @@ const HomeScreen = ({ navigation }) => {
                     }
                     <Categories />
                     <OfferSlider />
-                    <CardSlider title={'Todays Special'} data={foodData} navigation={navigation} />
+                    {/* <CardSlider title={'Todays Special'} data={foodData} navigation={navigation} />
                     <CardSlider title={'Non Veg Love'} data={nonVegData} navigation={navigation} />
                     <View style={{ marginBottom: 50 }}>
                         <CardSlider title={'Veg Hunger'} data={vegData} navigation={navigation} />
+                    </View> */}
 
-                    </View>
+                    {
+                        loading == true
+                            ?
+                            <View style={styles.indicator}>
+                                <ActivityIndicator size="large" color="red" />
+                            </View>
+                            :
+                            <>
+                                <CardSlider title={'Todays Special'} data={foodData} navigation={navigation} />
+                                <CardSlider title={'Non Veg Love'} data={nonVegData} navigation={navigation} />
+                                <View style={{ marginBottom: 70 }}>
+                                    <CardSlider title={'Veg Hunger'} data={vegData} navigation={navigation} />
+                                </View>
+                            </>
+                    }
                 </ScrollView>
 
             </View>
@@ -116,9 +137,10 @@ const styles = StyleSheet.create({
         width: '90%',
         borderRadius: 15,
         alignItems: 'center',
-        padding: 8,
+        padding: 3,
         margin: 20,
         elevation: 20,
+        paddingHorizontal:10
     },
     container: {
         flex: 1,
@@ -149,7 +171,12 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: color.col1,
         zIndex: 1000
-    }
+    },
+    indicator: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
 
 
 })

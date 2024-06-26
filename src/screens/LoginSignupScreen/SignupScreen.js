@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native'
 import { btn1, color, hr80, title } from '../../global/GlobalStyle'
 import { Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import firestore, { firebase } from '@react-native-firebase/firestore';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 
 
 
@@ -17,6 +18,7 @@ const SignupScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [passwordConfirmFocus, setPasswordConfirmFocus] = useState(false)
+  const [user, setUser] = useState(null);
 
   //storing data from input at one place
   const [email, setEmail] = useState('')
@@ -29,6 +31,34 @@ const SignupScreen = ({ navigation }) => {
 
   const [customError, setCustomeError] = useState('')
   const [successMsg, setSuccessMsg] = useState(null)
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '219053985271-ddj6umkir0cg6c3h7vq2ppb290stano5.apps.googleusercontent.com',
+    });
+  }, []);
+
+
+  const onGoogleButtonPress = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      await GoogleSignin.revokeAccess();
+      console.warn(userInfo.user)
+    } catch (error) {
+
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+
+        // user cancelled the login flow 
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log(error)
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log(error)
+      } else {
+        console.log(error)
+      }
+    }
+  };
 
   const handleSignup = () => {
 
@@ -53,7 +83,7 @@ const SignupScreen = ({ navigation }) => {
       return
     }
     console.log(customError)
-   
+
 
     if (passward != confirmPassward) {
       setCustomeError('Passward do not match')
@@ -81,7 +111,7 @@ const SignupScreen = ({ navigation }) => {
               phone: phone,
               passward: passward,
               address: address,
-              uid:userCredentials?.user?.uid
+              uid: userCredentials?.user?.uid
             }
 
             userRef.add(formData)
@@ -297,13 +327,7 @@ const SignupScreen = ({ navigation }) => {
               <Text style={styles.signInWith}>Sign in with</Text>
 
               <View>
-                <TouchableOpacity style={styles.signInWithContainer}>
-                  <Icon
-                    name='facebook'
-                    size={35}
-                    color={'#4267B2'}
-                  />
-                </TouchableOpacity>
+                <GoogleSigninButton onPress={onGoogleButtonPress}></GoogleSigninButton>
               </View>
 
               <View style={hr80}></View>

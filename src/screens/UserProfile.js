@@ -63,7 +63,7 @@ const UserProfileScreen = ({ navigation }) => {
                     style={styles.backButtonContainer}
                     onPress={() => navigation.navigate('HomeScreen')}
                 >
-                    <Text style={styles.backButton}>{'<'}</Text>
+                    <Text style={styles.backButton}>{'←'}</Text>
                 </TouchableOpacity>
                 <Text style={styles.heading}>User Profile</Text>
             </View>
@@ -122,6 +122,14 @@ const styles = StyleSheet.create({
     backButton: {
         fontSize: 24,
         color: 'white',
+        // alignSelf:'center',
+        textAlignVertical:'center',
+        textAlign:'center',
+        // padding:10,
+        // backgroundColor:'green',
+        height:30,
+        width:30,
+        marginBottom:14
     },
     heading: {
         fontSize: 24,

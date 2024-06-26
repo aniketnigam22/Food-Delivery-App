@@ -71,7 +71,8 @@ const ProductScreen = ({ navigation, route }) => {
                     style={styles.backButtonContainer}
                     onPress={() => navigation.navigate('HomeScreen')}
                 >
-                    <Text style={styles.backButton}>{'<'}</Text>
+                    <Text style={styles.backButton}>{'←'}</Text>
+
                 </TouchableOpacity>
             </View>
 
@@ -190,6 +191,14 @@ const ProductScreen = ({ navigation, route }) => {
 export default ProductScreen
 
 const styles = StyleSheet.create({
+
+    headingContainer: {
+        alignItems: 'center',
+        position: 'absolute',
+        zIndex: 100,
+        margin: 10,
+        justifyContent: 'center'
+    },
     backButtonContainer: {
         marginRight: 10,
         height: 30,
@@ -200,18 +209,17 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         elevation: 15
     },
-    headingContainer: {
-        alignItems: 'center',
-        position: 'absolute',
-        zIndex: 100,
-        margin: 10,
-        justifyContent: 'center'
-    },
     backButton: {
         fontSize: 24,
         color: 'white',
-        marginBottom: 4
-
+        // alignSelf:'center',
+        textAlignVertical: 'center',
+        textAlign: 'center',
+        // padding:10,
+        // backgroundColor:'green',
+        height: 30,
+        width: 30,
+        marginBottom: 14
     },
     container: {
         flex: 1,
